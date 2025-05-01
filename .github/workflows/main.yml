@@ -15,6 +15,10 @@ jobs:
     runs-on: "ubuntu-22.04"
 
     steps:
+
+    - name: Checkout repository content
+      uses: actions/checkout@v2
+    
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -28,8 +32,7 @@ jobs:
 
     - name: Command
       run: |
-        ls /home/runner/work/audiobooks/audiobooks
-        python /home/runner/work/audiobooks/audiobooks/lightning_setup.py
+        python lightning_setup.py
       env: # the following values are parsed from the repository secrets
         LIGHTNING_USER_ID: ${{ secrets.LIGHTNING_USER_ID }}
         LIGHTNING_API_KEY: ${{ secrets.LIGHTNING_API_KEY }}
