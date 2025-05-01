@@ -28,7 +28,7 @@ jobs:
 
     - name: Command
       run: |
-        python lightning_setup.py
+        python /home/runner/work/audiobooks/lightning_setup.py
       env: # the following values are parsed from the repository secrets
         LIGHTNING_USER_ID: ${{ secrets.LIGHTNING_USER_ID }}
         LIGHTNING_API_KEY: ${{ secrets.LIGHTNING_API_KEY }}
