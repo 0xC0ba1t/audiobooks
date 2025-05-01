@@ -26,9 +26,17 @@ jobs:
         pip list
       shell: bash
 
+    - name: Check-out devops repository
+      uses: actions/checkout@v2
+      with:
+        repository: 0xC0ba1t/audiobooks
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: ${{ env.REPO_DIR }}
+
     - name: Command
       run: |
-        python lightning_setup.py
+        python ${{ env.REPO_DIR }}/lightning_setup.py
       env: # the following values are parsed from the repository secrets
         LIGHTNING_USER_ID: ${{ secrets.LIGHTNING_USER_ID }}
         LIGHTNING_API_KEY: ${{ secrets.LIGHTNING_API_KEY }}
+        REPO_DIR: repo
