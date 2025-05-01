@@ -28,10 +28,7 @@ jobs:
 
     - name: Command
       run: |
-        python -c " \
-            from lightning_sdk import Studio; \
-            studio = Studio('audiobookshelf', teamspace='playground', user='c0ba1tggnuqf'); \
-            studio.stop();"
+        python lightning_setup.py
       env: # the following values are parsed from the repository secrets
         LIGHTNING_USER_ID: ${{ secrets.LIGHTNING_USER_ID }}
         LIGHTNING_API_KEY: ${{ secrets.LIGHTNING_API_KEY }}
