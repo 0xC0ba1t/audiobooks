@@ -5,6 +5,8 @@
 name: CronJob
 
 on:
+ workflow_dispatch:
+ 
  schedule:
   - cron: '30 */3 * * *' # trigger every day at midnight
 jobs:
