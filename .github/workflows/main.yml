@@ -1,0 +1,35 @@
+# Add to repository secrets:
+# LIGHTNING_USER_ID=000000-000000-000000-00000-000000000
+# LIGHTNING_API_KEY=111111-111111-111111-11111-111111111
+
+name: CronJob
+
+on:
+ schedule:
+  - cron: '30 */3 * * *' # trigger every day at midnight
+jobs:
+
+  cpu:
+    runs-on: "ubuntu-22.04"
+
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install lightning-sdk
+        pip list
+      shell: bash
+
+    - name: Command
+      run: |
+        python -c " \
+            from lightning_sdk import Studio; \
+            studio = Studio('audiobookshelf', teamspace='playground', user='c0ba1tggnuqf'); \
+            studio.stop();"
+      env: # the following values are parsed from the repository secrets
+        LIGHTNING_USER_ID: ${{ secrets.LIGHTNING_USER_ID }}
+        LIGHTNING_API_KEY: ${{ secrets.LIGHTNING_API_KEY }}
